@@ -131,8 +131,8 @@ function hierarchicalClustering(items, distance_of_items_fn = euclidian, distanc
         let min_distance = Infinity;
         let concerned_clusters_indexes = [1, 1];
         // Trouve la distance minimale entre deux clusters
-        for (const index1 of Object.keys(distances)) {
-            for (const index2 of Object.keys(distances[index1])) {
+        for (const index1 in distances) {
+            for (const index2 in distances[index1]) {
                 if (min_distance > distances[index1][index2]) {
                     min_distance = distances[index1][index2];
                     concerned_clusters_indexes = [+index1, +index2];
