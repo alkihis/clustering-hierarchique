@@ -126,42 +126,28 @@ export function hierarchicalClustering(
   while (current_clusters.length > 1) {
     // On va comparer tous les clusters entre eux
     // On trouve la plus petite distance, et on fusionne les clusters
-    const distances: { [index1: string]: { [index2: string]: number } } = {};
+    let min_distance = [Infinity, 0, 0];
+    const indexes_ok = new Set<number>();
 
     for (let i = 0; i < current_clusters.length; i++) {
-      if (!(i in distances)) {
-        distances[i] = {};
-      }
+      indexes_ok.add(i);
 
-      for (let j = 0; j < current_clusters.length; j++) {
-        if (i === j) {
-          continue;
-        }
-        
+      for (let j = 0; j < current_clusters.length; j++) {        
         // On a déjà traité toutes les distances de cet index
-        if (j in distances) {
+        // Ou alors j === i (i est déjà inséré)
+        if (indexes_ok.has(j)) {
           continue;
         }
 
-        distances[i][j] = distances_of_clusters_fn(current_clusters[i], current_clusters[j], distance_of_items_fn);
-      }
-    }
+        const dist = distances_of_clusters_fn(current_clusters[i], current_clusters[j], distance_of_items_fn);
 
-    let min_distance = Infinity;
-    let concerned_clusters_indexes: [number, number] = [1, 1];
-
-    // Trouve la distance minimale entre deux clusters
-    for (const index1 in distances) {
-      for (const index2 in distances[index1]) {
-        if (min_distance > distances[index1][index2]) {
-          min_distance = distances[index1][index2];
-          concerned_clusters_indexes = [+index1, +index2];
+        if (dist < min_distance[0]) {
+          min_distance = [dist, i, j];
         }
       }
     }
 
-    const index1 = concerned_clusters_indexes[0];
-    const index2 = concerned_clusters_indexes[1];
+    const [, index1, index2] = min_distance;
 
     // Copie des clusters actuels sans les deux fusionnés
     const new_clusters = current_clusters.filter((_, index) => index !== index1 && index !== index2);
