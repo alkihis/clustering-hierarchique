@@ -1,0 +1,22 @@
+{
+  "name": "data-mining",
+  "version": "1.0.0",
+  "description": "> Calcule selon la complete link method (voir fn `maxDistanceInCluster`).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alkihis/clustering-hierarchique.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alkihis/clustering-hierarchique/issues"
+  },
+  "homepage": "https://github.com/alkihis/clustering-hierarchique#readme",
+  "dependencies": {
+    "python-zip": "^1.0.5"
+  }
+}
