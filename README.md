@@ -2,8 +2,6 @@
 
 > Calcule selon la complete link method (voir fn `maxDistanceInCluster`).
 
-**!**
-
 La méthode de calcul de la distance est *Manhattan* ou *Euclidienne*.
 
 ## Installation et lancement
@@ -14,8 +12,12 @@ Node.js version 8 minimum doit être installé.
 git clone https://github.com/alkihis/clustering-hierarchique.git
 cd clustering-hierarchique
 npm i
+
+# Compile
 tsc
-node dist/index.js
+
+# Lance le script de test
+node dist/test.js
 ```
 
 ## Paramètres
